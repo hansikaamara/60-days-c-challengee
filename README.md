@@ -1,5 +1,5 @@
 # 60-days-c-challengee
-Calculation of employee salary
+
 #include <stdio.h>
 int main()
 float basic_salary;
