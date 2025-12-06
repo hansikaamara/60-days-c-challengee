@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int main() {
+    float meal_cost;
+    float tax_percent = 5.0f;
+    float tip_percent = 10.0f;
+
+    printf("Enter the meal cost: ");
+    scanf("%f", &meal_cost);
+
+    float tax = (tax_percent / 100.0f) * meal_cost;
+    float tip = (tip_percent / 100.0f) * meal_cost;
+
+    float total_bill = meal_cost + tax + tip;
+    float each_share = total_bill / 3.0f;
+
+    float person1 = (each_share / 2.0f) + (each_share);
+    float person2 = person1;
+    float person3 = 0.0f;
+
+    printf("Person 1 pays: %f\n", person1);
+    printf("Person 2 pays: %f\n", person2);
+    printf("Person 3 pays: %f\n", person3);
+
+    return 0;
+}
