@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+int main() {
+    int units;
+    float bill = 0.0;
+    float meter_charge = 50.0;
+    
+    printf("Enter total units consumed: ");
+    scanf("%d", &units);
+    
+    
+    if (units <= 100) {
+        bill = units * 3.00;
+    } 
+    else if (units <= 200) {
+        bill = 100 * 3.00 + (units - 100) * 4.50;
+    }
+    else if (units <= 300) {
+        bill = 100 * 3.00 + 100 * 4.50 + (units - 200) * 6.00;
+    }
+    else {
+        bill = 100 * 3.00 + 100 * 4.50 + 100 * 6.00 + (units - 300) * 8.00;
+    }
+    
+    
+    float total_bill = bill + meter_charge;
+    
+   
+    printf("\n=== Electricity Bill Summary ===\n");
+    printf("Units Consumed: %d\n", units);
+    printf("Energy Charges: ₹%f\n", bill);
+    printf("Meter Charge: ₹%f\n", meter_charge);
+    printf("------------------------\n");
+    printf("Total Amount Payable: ₹%f\n", total_bill);
+    
+    return 0;
+}
