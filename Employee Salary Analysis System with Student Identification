@@ -1,0 +1,133 @@
+#include <stdio.h>
+#include <string.h>
+#define MAX_EMPLOYEES 10
+
+int main() {
+    // Student Information
+    char studentName[50];
+    char regNo[20];
+    char section[5];
+
+    // Employee Salary Data
+    int numEmployees, i, choice, countAbove = 0, countBelow = 0;
+    int salaries[MAX_EMPLOYEES], sortedSalaries[MAX_EMPLOYEES];
+    int total = 0, highest, lowest;
+    float average;
+
+    // Input Student Information
+    printf("========= Employee Salary Analysis System =========\n");
+    printf("Enter Student Name: ");
+    scanf("%s", studentName);
+
+    printf("Enter Registration Number: ");
+    scanf("%s", regNo);
+
+    printf("Enter Section: ");
+    scanf("%s", section);
+
+    // Input Employee Salary Data
+    do {
+        printf("Enter number of employees (max 10): ");
+        scanf("%d", &numEmployees);
+    } while (numEmployees <= 0 || numEmployees > MAX_EMPLOYEES);
+
+    printf("Enter salaries:\n");
+    for(i = 0; i < numEmployees; i++) {
+        printf("%d: ", i+1);
+        scanf("%d", &salaries[i]);
+    }
+
+    // Menu Loop
+    do {
+        printf("\n========= Menu =========\n");
+        printf("1. Display All Salaries\n");
+        printf("2. Display Total and Average Salary\n");
+        printf("3. Display Highest and Lowest Salary\n");
+        printf("4. Count Above/Below Average\n");
+        printf("5. Display Sorted Salaries\n");
+        printf("6. Exit\n");
+        printf("========================\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        // Menu Results - always show student info
+        printf("Submitted by: %s | Reg No: %s | Section: %s\n", studentName, regNo, section);
+
+        switch(choice) {
+            case 1:
+                printf("All Salaries: ");
+                for(i = 0; i < numEmployees; i++)
+                    printf("%d ", salaries[i]);
+                printf("\n");
+                break;
+
+            case 2:
+                total = 0;
+                for(i = 0; i < numEmployees; i++)
+                    total += salaries[i];
+                average = (float)total / numEmployees;
+                printf("Total Salary = %d\n", total);
+                printf("Average Salary = %.2f\n", average);
+                break;
+
+            case 3:
+                highest = salaries[0];
+                lowest = salaries[0];
+                for(i = 1; i < numEmployees; i++) {
+                    if(salaries[i] > highest)
+                        highest = salaries[i];
+                    if(salaries[i] < lowest)
+                        lowest = salaries[i];
+                }
+                printf("Highest Salary = %d\n", highest);
+                printf("Lowest Salary = %d\n", lowest);
+                break;
+
+            case 4:
+                // Calculate average first
+                total = 0;
+                for(i = 0; i < numEmployees; i++)
+                    total += salaries[i];
+                average = (float)total / numEmployees;
+                countAbove = 0;
+                countBelow = 0;
+                for(i = 0; i < numEmployees; i++) {
+                    if(salaries[i] > average)
+                        countAbove++;
+                    else if(salaries[i] < average)
+                        countBelow++;
+                }
+                printf("Employees Above Average: %d\n", countAbove);
+                printf("Employees Below Average: %d\n", countBelow);
+                break;
+
+            case 5:
+                // Copy array for sorting
+                for(i = 0; i < numEmployees; i++)
+                    sortedSalaries[i] = salaries[i];
+                // Bubble sort
+                for(i = 0; i < numEmployees-1; i++) {
+                    for(int j = 0; j < numEmployees-i-1; j++) {
+                        if(sortedSalaries[j] > sortedSalaries[j+1]) {
+                            int temp = sortedSalaries[j];
+                            sortedSalaries[j] = sortedSalaries[j+1];
+                            sortedSalaries[j+1] = temp;
+                        }
+                    }
+                }
+                printf("Salaries in Ascending Order: ");
+                for(i = 0; i < numEmployees; i++)
+                    printf("%d ", sortedSalaries[i]);
+                printf("\n");
+                break;
+            case 6:
+                printf("Exiting program.\n");
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+        printf("Challenge Day 17 – Code2Grow Program\n");
+    } while (choice != 6);
+
+    return 0;
+}
